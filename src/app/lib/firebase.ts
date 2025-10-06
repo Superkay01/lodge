@@ -1,4 +1,3 @@
-// app/lib/firebase.ts
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAuth,
@@ -8,10 +7,11 @@ import {
 import {
   getFirestore,
   enableIndexedDbPersistence,
+  FirestoreError, // Import FirestoreError
 } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-// Prefer env vars; fallback to your actual values so the app works even if .env.local isn't loaded yet.
+// Firebase configuration
 const firebaseConfig = {
   apiKey:
     process.env.NEXT_PUBLIC_FIREBASE_API_KEY ||
@@ -45,7 +45,7 @@ setPersistence(auth, browserLocalPersistence).catch(() => {});
 
 // Enable Firestore offline cache (browser only)
 if (typeof window !== 'undefined') {
-  enableIndexedDbPersistence(db).catch((e: any) => {
+  enableIndexedDbPersistence(db).catch((e: FirestoreError) => {
     // Multi-tab: "failed-precondition"; unsupported: "unimplemented"
     if (e?.code !== 'failed-precondition' && e?.code !== 'unimplemented') {
       console.warn('Firestore persistence error:', e);

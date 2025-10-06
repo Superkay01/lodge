@@ -1,16 +1,25 @@
-// src/context/AuthContext.tsx
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signOut, User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@/app/lib/firebase'; // Adjusted path to match your project structure
+import { auth, db } from '@/app/lib/firebase';
+
+// Define the expected Firestore user data structure (adjust based on your Firestore schema)
+interface FirestoreUserData {
+  role?: string;
+  // Add other known fields from your 'users' collection, e.g.:
+  // name?: string;
+  // createdAt?: string;
+  [key: string]: unknown; // Allow additional dynamic fields
+}
 
 interface User {
   uid: string;
   email: string | null;
-  role?: string; // From Firestore 'users' collection
-  [key: string]: any; // Allow additional fields from Firestore
+  role?: string;
+  // Use Record<string, unknown> or FirestoreUserData for additional fields
+  [key: string]: FirestoreUserData[keyof FirestoreUserData];
 }
 
 interface AuthContextType {
