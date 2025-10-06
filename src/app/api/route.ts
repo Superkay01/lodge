@@ -1,6 +1,6 @@
 // app/api/stats/route.ts
 import { NextResponse } from "next/server";
-import { db } from "@/lib/firebase";
+import { db } from "@/app/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 export async function GET() {
