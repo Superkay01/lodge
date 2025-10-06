@@ -1,7 +1,12 @@
-// utils/auth.ts
+// src/app/utils/auth.ts
 import { auth, db } from '@/app/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
+// Define interface for user document
+interface UserDoc {
+  role?: string;
+}
 
 export async function finalizeSessionAndRedirect(router: AppRouterInstance) {
   const user = auth.currentUser;
@@ -9,7 +14,7 @@ export async function finalizeSessionAndRedirect(router: AppRouterInstance) {
 
   // 1) Read role from Firestore
   const snap = await getDoc(doc(db, 'users', user.uid));
-  const userRole = (snap.exists() && (snap.data() as any).role) || 'student';
+  const userRole = (snap.exists() && (snap.data() as UserDoc).role) || 'student';
 
   // 2) Exchange ID token for HttpOnly cookies (for middleware)
   const idToken = await user.getIdToken();

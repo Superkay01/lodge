@@ -1,10 +1,10 @@
-// src/components/landing/ListingsSection.tsx
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, query, where, limit, onSnapshot } from 'firebase/firestore';
+import { collection, query, where, limit, onSnapshot, Timestamp } from 'firebase/firestore';
 import { auth, db } from '@/app/lib/firebase';
 import PropertyCard from '@/components/landing/PropertyCard';
 
@@ -12,7 +12,7 @@ import PropertyCard from '@/components/landing/PropertyCard';
 type MediaItem = { url: string; publicId?: string };
 type ListingDoc = {
   campus?: string;
-  createdAt?: any;
+  createdAt?: Timestamp; // Fixed: Use Timestamp instead of any
   isVerified?: string;
   landlordId?: string;
   locationArea?: string;
@@ -24,7 +24,7 @@ type ListingDoc = {
 };
 type Row = ListingDoc & { id: string; createdAtMs: number };
 
-export default function ListingsSection() {
+export default function ListingSection() {
   const [listings, setListings] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<string | null>(null);

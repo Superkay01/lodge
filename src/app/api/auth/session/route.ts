@@ -1,10 +1,10 @@
-// app/api/auth/session/route.ts
-import { NextResponse } from 'next/server';
+// src/app/api/auth/session/route.ts
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth } from '@/app/lib/firebaseAdmin';
 import { getFirestore } from 'firebase-admin/firestore';
 
-export const runtime = 'nodejs'; // ensure Node.js, not Edge
+export const runtime = 'nodejs';
 
 const AUTH_COOKIE = process.env.SESSION_COOKIE_NAME_AUTH || 'auth';
 const ROLE_COOKIE = process.env.SESSION_COOKIE_NAME_ROLE || 'role';
@@ -14,17 +14,14 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const allowedRoles = new Set(['student', 'landlord', 'admin']);
 
-export async function POST(req: Request) {
-  try {
-    let payload: any = {};
-    try {
-      payload = await req.json();
-    } catch {
-      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
-    }
+interface SessionRequestBody {
+  idToken?: string;
+}
 
-    const idToken = payload?.idToken;
-    // role from client is ignored (we read it from Firestore)
+export async function POST(req: NextRequest) {
+  try {
+    const payload: SessionRequestBody = await req.json().catch(() => ({}));
+    const idToken = payload.idToken;
     if (!idToken) {
       return NextResponse.json({ error: 'Missing idToken' }, { status: 400 });
     }
@@ -36,7 +33,7 @@ export async function POST(req: Request) {
     // 2) Fetch role from Firestore (authoritative source)
     const db = getFirestore();
     const userSnap = await db.collection('users').doc(uid).get();
-    let role = userSnap.exists ? (userSnap.data()?.role as string) : 'student';
+    let role = userSnap.exists ? (userSnap.data() as { role?: string }).role || 'student' : 'student';
     if (!allowedRoles.has(role)) role = 'student';
 
     // 3) Set HttpOnly cookies
@@ -59,17 +56,17 @@ export async function POST(req: Request) {
     const res = NextResponse.json({ ok: true, uid, role });
     res.headers.set('Cache-Control', 'no-store');
     return res;
-  } catch (e: any) {
-    const res = NextResponse.json({ error: 'Invalid or expired token' }, { status: 401 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Invalid or expired token';
+    const res = NextResponse.json({ error: errorMessage }, { status: 401 });
     res.headers.set('Cache-Control', 'no-store');
     return res;
   }
 }
 
 export async function DELETE() {
-  // Clear cookies on logout (attrs must match those used when setting)
   const c = cookies();
-  const opts = { httpOnly: true, sameSite: 'lax', path: '/', maxAge: 0, secure: isProd as boolean };
+  const opts = { httpOnly: true, sameSite: 'lax' as const, path: '/', maxAge: 0, secure: isProd };
   c.set(AUTH_COOKIE, '', opts);
   c.set(ROLE_COOKIE, '', opts);
 
