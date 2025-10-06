@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "@/app/ui/Container";
-import { ThemeToggle } from "../ThemeToggle/page";
+
 
 const Navbar = () => {
   const links = [
@@ -86,7 +86,7 @@ const Navbar = () => {
               Sign Up
             </Link>
           </div>
-          <ThemeToggle/>
+         
         </div>
 
         {/* Hamburger Show on md<) */}
