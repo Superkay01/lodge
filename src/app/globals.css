@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
+/* === GLOBAL COLOR VARIABLES === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-light-blue: #ebf8ff;
+  --color-royal-blue: #0025cc;
+  --color-white: #ffffff;
+  --color-medium-blue: #2e4cd5;
+  --color-black: #000000;
+  --color-steel-blue: #546cdd;
+  --color-dark-gray: #424242;
+  --color-medium-gray: #707070;
+  --color-green: #00db00;
+  --color-periwinkle: #697fe1;
+  --color-hover-blue: #9faffa;
+
+  --background: var(--color-white);
+  --foreground: var(--color-dark-gray);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* === DARK MODE SUPPORT === */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +26,37 @@
   }
 }
 
+/* === TAILWIND THEME HOOKS === */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
+}
+
+/* === BASE STYLES === */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* === OPTIONAL UTILITIES === */
+.text-royal-blue {
+  color: var(--color-royal-blue);
+}
+
+.text-bright-green {
+  color: var(--color-bright-green);
+}
+
+.bg-royal-blue {
+  background-color: var(--color-royal-blue);
+}
+
+.bg-bright-green {
+  background-color: var(--color-bright-green);
+}
+
+
+

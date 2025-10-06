@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-
 import "./globals.css";
-
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Lodgelink",
@@ -14,11 +13,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className='min-h-screen flex flex-col bg-white text-blue-950'
+        className="min-h-screen flex flex-col bg-white text-blue-950 dark:bg-gray-900 dark:text-white"
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
