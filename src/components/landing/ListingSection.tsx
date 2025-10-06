@@ -37,6 +37,7 @@ export default function ListingSection() {
     });
     return () => unsub();
   }, []);
+  
 
   useEffect(() => {
     const q = query(
@@ -87,6 +88,7 @@ export default function ListingSection() {
       router.push('/landlord-listings');
     }
   };
+  
 
   return (
     <section className="py-12 bg-color-white dark:bg-gray-900">
