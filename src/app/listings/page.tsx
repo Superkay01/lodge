@@ -1,13 +1,12 @@
-import React from "react";
-import Navbar from "../components/landing/Navbar";
+import React from 'react';
 
-const page = () => {
+
+const Page = () => {
   return (
     <div>
-      <Navbar />
-      Listings
+      
     </div>
   );
 };
 
-export default page;
+export default Page;
