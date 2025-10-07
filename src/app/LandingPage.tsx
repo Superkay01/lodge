@@ -4,6 +4,8 @@ import Home from "./Home/page"
 import ListingSection from "@/components/landing/ListingSection";
 import StatsCounter from "@/components/StatsCounter";
 import FeatureTiles from "@/components/FeatureTiles";
+import PartnersLogo from "@/components/PartnersLogo"
+import CTASection from "@/components/CTASection";
 import Footer from "../components/landing/Footer";
 
 const LandingPage = () => {
@@ -12,8 +14,10 @@ const LandingPage = () => {
       <Navbar />
       <Home/>
       <ListingSection/>
-      <StatsCounter/>
       <FeatureTiles/>
+      <StatsCounter/>
+      <PartnersLogo/>
+      <CTASection/>
       <Footer/>
     </div>
   );
