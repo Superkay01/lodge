@@ -5,6 +5,7 @@ import ListingSection from "@/components/landing/ListingSection";
 import StatsCounter from "@/components/StatsCounter";
 import FeatureTiles from "@/components/FeatureTiles";
 import PartnersLogo from "@/components/PartnersLogo"
+import TeamSection from "@/components/TeamSection"
 import CTASection from "@/components/CTASection";
 import Footer from "../components/landing/Footer";
 
@@ -16,6 +17,7 @@ const LandingPage = () => {
       <ListingSection/>
       <FeatureTiles/>
       <StatsCounter/>
+      <TeamSection/>
       <PartnersLogo/>
       <CTASection/>
       <Footer/>
