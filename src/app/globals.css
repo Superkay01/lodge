@@ -17,6 +17,15 @@
   --background: var(--color-white);
   --foreground: var(--color-dark-gray);
 }
+/* styles/global.css */
+.blinking {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 /* === DARK MODE SUPPORT === */
 @media (prefers-color-scheme: dark) {
@@ -57,6 +66,10 @@ body {
 .bg-bright-green {
   background-color: var(--color-bright-green);
 }
+
+
+
+
 
 
 

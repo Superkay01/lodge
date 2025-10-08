@@ -6,6 +6,7 @@ import StatsCounter from "@/components/StatsCounter";
 import FeatureTiles from "@/components/FeatureTiles";
 import PartnersLogo from "@/components/PartnersLogo"
 import TeamSection from "@/components/TeamSection"
+import TestimonialsCarousel from "@/components/TestimonialsCarousel"
 import CTASection from "@/components/CTASection";
 import Footer from "../components/landing/Footer";
 
@@ -19,6 +20,7 @@ const LandingPage = () => {
       <StatsCounter/>
       <TeamSection/>
       <PartnersLogo/>
+      <TestimonialsCarousel/>
       <CTASection/>
       <Footer/>
     </div>

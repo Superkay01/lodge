@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "@/app/ui/Container";
+import ScreenModeToggle from "../ScreenModeToggle";
 
 
 const Navbar = () => {
@@ -86,6 +87,7 @@ const Navbar = () => {
               Sign Up
             </Link>
           </div>
+          <ScreenModeToggle/>
          
         </div>
 
@@ -164,7 +166,9 @@ const Navbar = () => {
               Sign Up
             </Link>
           </div>
+          <ScreenModeToggle/>
         </nav>
+        
       </div>
     </header>
   );
