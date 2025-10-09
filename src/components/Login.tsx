@@ -18,9 +18,7 @@ const Login = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const text = "Welcome to Lodgelink, where finding your perfect home is just a click away. Sign in to access your personalized dashboard, manage listings, and stay connected with trusted landlords and tenants."
-    const shortText = text.split('.')[0] + '.'
-
+    
     const handleEmailLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -87,9 +85,12 @@ const handleGoogleLogin = async () => {
 if (loading) {
     return <p className="text-center mt-10 blinking">Loading...</p>;
   }
+    const text = "Welcome to Lodgelink, where finding your perfect home is just a click away. Sign in to access your personalized dashboard, manage listings, and stay connected with trusted landlords and tenants."
+    const shortText = text.split('.')[0] + '.'
+
     return (
-        <div className='bg-[#0025cc] w-[80%] m-auto rounded-lg mt-5 mb-5'>
-            <div className="grid grid-cols-1 sm:grid-cols-2 w-[80%] gap-3 m-auto rounded-lg">
+        <div className='bg-[#0025cc] w-full sm:w-[80%] m-auto rounded-lg mt-5 mb-5'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full sm:w-[80%] gap-3 m-auto rounded-lg">
                 <div className="relative rounded-lg pl-10 pr-10 py-5 mt-4 mb-4 bg-cover bg-center object-contain" style={{ backgroundImage: "url('/part.jpg')" }}> 
                     <span className='absolute  inset-0 z-0'></span>
                     <div className="flex items-center justify-start gap-2 mt-7"> 
@@ -140,9 +141,9 @@ if (loading) {
                             <div className="flex justify-between mt-5">
                                 <div className="flex gap-2 items-center">
                                     <p><input type="checkbox"  /></p>
-                                    <p className='text-[#2e4cd5]  text-[20px] sm:text-[15px]'>Remember Me</p>
+                                    <p className='text-[#2e4cd5]  text-[15px] sm:text-[15px]'>Remember Me</p>
                                 </div>
-                                <Link href="/forgotten" className=' text-[20px] sm:text-[15px] text-[#ffffff]'>Forgotten Password</Link>
+                                <Link href="/forgotten" className=' text-[15px] sm:text-[15px] text-[#ffffff]'>Forgotten Password</Link>
                             </div>
                             <button type='submit' className='cursor-pointer w-full bg-[#697fe1] hover:bg-[#0025cc] transition ease-in-out duration-300 text-white py-2 rounded-lg'>Login with Email</button>
                             <div className="flex items-center gap-1 mt-2">
@@ -154,7 +155,7 @@ if (loading) {
                                 <button
                                     type="button"
                                     onClick={handleGoogleLogin}
-                                    className="cursor-pointer w-full bg-[#ffffff] hover:bg-[#0025cc] transition ease-in-out duration-300 text-[#697fe1] py-2 rounded-lg flex items-center justify-center gap-2"
+                                    className="cursor-pointer w-full bg-[#ffffff] hover:bg-[#0025cc] hover:text-white transition ease-in-out duration-300 text-[#0025cc] py-2 rounded-lg flex items-center justify-center gap-2"
                                 >
                                     <Image src="/google.png" alt="Google" width={30} height={30} />
                                     Continue with Google
