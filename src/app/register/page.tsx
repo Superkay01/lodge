@@ -6,10 +6,10 @@ import Navbar from '@/components/landing/Navbar';
 import Footer from '@/components/landing/Footer';
 import {
   createUserWithEmailAndPassword,
-  EmailAuthProvider,
+
   GoogleAuthProvider,
   signInWithPopup,
-  linkWithCredential,
+  
 } from 'firebase/auth';
 import { auth, db } from '@/app/lib/firebase';
 import { finalizeSessionAndRedirect } from '@/app/utils/auth';
@@ -54,7 +54,7 @@ const Page = () => {
 
       // set session cookies + redirect
       await finalizeSessionAndRedirect(router);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err?.message || 'Email sign-up failed.');
     } finally {
       setLoading(false);
@@ -79,7 +79,7 @@ const Page = () => {
       });
 
       await finalizeSessionAndRedirect(router);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err?.message || 'Google sign-up failed.');
     } finally {
       setLoading(false);
@@ -98,7 +98,7 @@ const Page = () => {
         {
           ...existing,
           ...data,
-          role: data.role ?? (existing as any).role ?? 'student',
+          role: data.role ?? (existing as unknown).role ?? 'student',
           updatedAt: serverTimestamp(),
         },
         { merge: true }
