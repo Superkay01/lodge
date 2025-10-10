@@ -11,8 +11,6 @@ import {
   doc,
   addDoc,
   serverTimestamp,
-  DocumentData,
-  QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { app } from "@/app/lib/firebase";
@@ -27,7 +25,7 @@ type AdminUser = {
   phone?: string;
   role: Role;
   disabled?: boolean;
-  createdAt?: any; // Firestore Timestamp
+  createdAt?: unknown; 
 };
 
 type ConfirmDialogProps = {
@@ -233,8 +231,8 @@ export default function AdminUsersPage() {
   async function writeAudit(params: {
     action: "role_change" | "disable_change";
     targetUserId: string;
-    before: Timestamp;
-    after: Timestamp;
+    before: unknown;
+    after: unknown;
   }) {
     const actorId = auth.currentUser?.uid || "unknown";
     await addDoc(collection(db, "audit"), {
@@ -385,7 +383,7 @@ export default function AdminUsersPage() {
                               message: (
                                 <>
                                   You are about to change <strong>{u.displayName || u.id}</strong>
-                                  's role to <strong>landlord</strong>.
+                                  s role to <strong>landlord</strong>.
                                 </>
                               ),
                               onConfirm: () => setUserRole(u.id, "landlord"),
@@ -404,7 +402,7 @@ export default function AdminUsersPage() {
                               message: (
                                 <>
                                   You are about to set{" "}
-                                  <strong>{u.displayName || u.id}</strong> 's role to{" "}
+                                  <strong>{u.displayName || u.id}</strong> s role to{" "}
                                   <strong>student</strong>.
                                 </>
                               ),
