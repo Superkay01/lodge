@@ -260,7 +260,7 @@ export default function AdminUsersPage() {
         try {
           await opts.onConfirm();
           push({ kind: "success", msg: opts.successMsg });
-        } catch (e: any) {
+        } catch (e: unknown) {
           console.error(e);
           push({ kind: "error", msg: opts.errorMsg });
         }
@@ -384,8 +384,8 @@ export default function AdminUsersPage() {
                               title: "Promote to landlord?",
                               message: (
                                 <>
-                                  You are about to change <strong>{u.displayName || u.id}</strong>'s
-                                  role to <strong>landlord</strong>.
+                                  You are about to change <strong>{u.displayName || u.id}</strong>
+                                  's role to <strong>landlord</strong>.
                                 </>
                               ),
                               onConfirm: () => setUserRole(u.id, "landlord"),
@@ -404,7 +404,7 @@ export default function AdminUsersPage() {
                               message: (
                                 <>
                                   You are about to set{" "}
-                                  <strong>{u.displayName || u.id}</strong>'s role to{" "}
+                                  <strong>{u.displayName || u.id}</strong> 's role to{" "}
                                   <strong>student</strong>.
                                 </>
                               ),

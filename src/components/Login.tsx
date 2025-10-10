@@ -27,9 +27,9 @@ const Login = () => {
       setLoading(true);
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       await redirectUser(user.uid);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError(error.message || 'An error occurred during login');
-      setLoginAttempted(false); // Reset on error
+      setLoginAttempted(false); 
     } finally {
       setLoading(false);
     }
@@ -37,15 +37,15 @@ const Login = () => {
 
   // Handle Google login
   const handleGoogleLogin = async () => {
-    setLoginAttempted(true); // Mark login attempt
+    setLoginAttempted(true); 
     try {
       setLoading(true);
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
       await redirectUser(user.uid);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError(error.message || 'An error occurred during Google login');
-      setLoginAttempted(false); // Reset on error
+      setLoginAttempted(false); 
     } finally {
       setLoading(false);
     }
