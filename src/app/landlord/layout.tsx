@@ -1,28 +1,28 @@
-"use client";
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import AdminSidebar from "@/app/admin/AdminSidebar";
 import Image from 'next/image';
-import { FaCaretDown, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import { logout } from "@/app/utils/logout";
+import LandlordSidebar from './LandlordSidebar';
+import { FaCaretDown, FaCog, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { logout } from '@/app/utils/logout';
 
-const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+const LandlordLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSideBarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Handle screen resize for mobile view
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      setIsSidebarCollapsed(mobile); 
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    useEffect(() => {
+      const handleResize = () => {
+        const mobile = window.innerWidth < 1024;
+        setIsMobile(mobile);
+        setIsSidebarCollapsed(mobile); 
+      };
+  
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -37,43 +37,39 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex min-h-screen">
-      <AdminSidebar onCollapseChange={setIsSidebarCollapsed} />
+      <LandlordSidebar onCollapseChange={setIsSidebarCollapsed} />
+
       <div
         className={`flex-1 flex flex-col transition-all duration-300 ${
-          isSidebarCollapsed ? 'lg:ml-13' : 'lg:ml-44'
+          isSideBarCollapsed ? 'lg:ml-13' : 'lg:ml-44'
         } bg-[var(--color-light-blue)] text-[var(--color-dark-gray)] min-w-0`}
       >
-        <header
-          className="h-16 flex items-center justify-between px-6 border-b border-[var(--color-hover-blue)] bg-[var(--color-royal-blue)] text-[var(--color-white)] shadow-sm w-full"
-        >
-          <h1 className="text-lg font-semibold sm:ml-10 ml-10 sticky">Admin Dashboard</h1>
+        <header className="h-16 flex items-center justify-between px-6 border-b border-[var(--color-blue)] bg-[var(--color-royal-blue)] text-[var(--color-white)] shadow-sm w-full">
+          <h1 className="text-lg font-semibold sm:ml-0 ml-10 sticky">Landlord Dashboard</h1>
+
           <div className="relative" ref={dropdownRef}>
             <button
               className="flex items-center gap-2 hover:bg-[var(--color-hover-blue)]/90 p-2 rounded-md transition-colors"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              aria-label="User profile menu"
+              aria-label="User Profile Menu"
             >
               <div className="h-8 w-8 rounded-full bg-white overflow-hidden">
-                <Image
-                  src="/user-avatar.png" // Replace with actual user avatar path
-                  width={32}
-                  height={32}
-                  alt="User avatar"
-                />
+                <Image src="/user.png" width={32} height={32} alt="user-avatar" />
               </div>
-              {!isMobile && <span className="text-sm font-medium">Admin User</span>}
+              {!isMobile && <span className="text-sm font-medium">Landlord User</span>}
               <FaCaretDown className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
+
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white text-[var(--color-dark-gray)] rounded-md shadow-lg z-50">
                 <div className="p-3 border-b">
-                  <p className="font-semibold">Admin User</p>
-                  <p className="text-sm text-gray-500">admin@example.com</p>
+                  <p className="font-semibold">Landlord User</p>
+                  <p className="text-sm text-blue-200">Landlord@gmail.com</p>
                 </div>
                 <ul className="py-1">
                   <li>
                     <a
-                      href="/admin/profile"
+                      href="/landlord/profile"
                       className="flex items-center gap-2 px-4 py-2 hover:bg-[#9faffa]"
                     >
                       <FaUser />
@@ -82,7 +78,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                   </li>
                   <li>
                     <a
-                      href="/admin/settings"
+                      href="/landlord/settings"
                       className="flex items-center gap-2 px-4 py-2 hover:bg-[#9faffa]"
                     >
                       <FaCog />
@@ -103,10 +99,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             )}
           </div>
         </header>
+
         <main className="flex-1 ml-10 sm:ml-0 p-6 w-full">{children}</main>
       </div>
     </div>
   );
 };
 
-export default AdminLayout;
+export default LandlordLayout;

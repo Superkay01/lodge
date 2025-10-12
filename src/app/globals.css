@@ -18,13 +18,12 @@
   --foreground: var(--color-dark-gray);
 }
 
-/* styles/global.css */
+/* === ANIMATIONS === */
 .blinking {
   animation: blink 1s infinite;
 }
 
 @keyframes blink {
-  /* 0% { opacity: 1; } */
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
@@ -49,7 +48,6 @@ body {
   color: var(--color-royal-blue);
 }
 
-/* Removed undefined --color-bright-green, added valid alternative */
 .text-green {
   color: var(--color-green);
 }
@@ -62,3 +60,11 @@ body {
   background-color: var(--color-green);
 }
 
+/* ✅ VALID custom variable background helpers (optional) */
+.bg-\[var\(--color-hover-blue\)\] {
+  background-color: var(--color-hover-blue);
+}
+
+.bg-\[var\(--color-periwinkle\)\] {
+  background-color: var(--color-periwinkle);
+}

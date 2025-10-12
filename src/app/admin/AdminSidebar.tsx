@@ -76,7 +76,7 @@ const AdminSidebar = ({ onCollapseChange }: AdminSidebarProps) => {
   return (
     <aside
       className={`fixed top-0 left-0 h-screen bg-[var(--color-royal-blue)] text-[var(--color-white)] flex flex-col z-40 transition-all duration-300 ${
-        isCollapsed ? 'w-20' : 'w-64'
+        isCollapsed ? 'w-13' : 'w-44'
       }`}
       aria-label="Admin navigation"
     >
@@ -119,7 +119,7 @@ const AdminSidebar = ({ onCollapseChange }: AdminSidebarProps) => {
       {/* Toggle Button */}
       <button
         className={`absolute top-21 ${
-          isCollapsed ? 'left-20' : 'left-64'
+          isCollapsed ? 'left-17' : 'left-47'
         } transform -translate-y-1/2 -translate-x-full text-white bg-[var(--color-medium-blue)] p-2 rounded-full`}
         onClick={toggleCollapse}
       >
