@@ -3,7 +3,7 @@
 import React, {useState} from 'react'
 
 
-const page = () => {
+const Page = () => {
     const [search, setSearch] = useState('');
     const openCreate = () => {
     console.log('Open property creation modal');
@@ -20,7 +20,7 @@ const page = () => {
                 </div>
                 <button onClick={openCreate}
                 className='px-4 py-2 rounded-xl shadow text-[var(--color-white)] hover:opacity-90'
-                style={{background: 'var(--color-royal-blue)]'}}
+                style={{background: 'var(--color-royal-blue)'}}
                 >
                     + New Property
                 </button>
@@ -54,4 +54,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
